@@ -3,7 +3,6 @@ import UserModel from "../../../../model/UserModel";
 import bcrypt from "bcryptjs";
 
 export async function POST(request) {
-    console.log('----------------------------------------------------------------');
     await dbConnect();
     const {firstName, lastName, email, password } = await request.json(); 
     try {

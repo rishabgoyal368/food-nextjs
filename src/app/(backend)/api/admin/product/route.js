@@ -11,10 +11,10 @@ export async function GET(request) {
     try {
         const { searchParams } = new URL(request.url);
         const name = searchParams.get("name");
-        console.log('name', name);
         const getAllProducts = await ProductModel.find({
             ...(name && {
                 $or: [
+                    { CategoryId :  name },
                     { productName: { $regex: name, $options: 'i' }},
                     { _id :  name },
                 ],

@@ -1,15 +1,10 @@
-import Image from "next/image";
-import { auth, signOut } from "./auth";
-import { redirect } from "next/navigation";
+'use server'
+import CategoryComponent from "./_component/Dashboard/CategoryComponent";
 
 export default async function Home() {
-  const session  = await auth();
-  if(!session){
-    return redirect('/api/auth/signin')
-  }
   return (
    <>
-    Hello {session?.email}
+    <CategoryComponent /> 
    </>
   );
 }
