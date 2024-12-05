@@ -11,21 +11,21 @@ function CartPage() {
   const router = useRouter();
 
   // Fetch cart data
-  useEffect(() => {
-    async function fetchCart() {
-      try {
-        const response = await axios.get("/api/user/cart");
-        if (response.data.succcess) {
-          setCartData(response.data.data);
-        }
-
-        console.log('cartData', cartData);
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-      } finally {
-        setLoading(false);
+  async function fetchCart() {
+    try {
+      const response = await axios.get("/api/user/cart");
+      if (response.data.succcess) {
+        setCartData(response.data.data);
       }
+
+      console.log('cartData', cartData);
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+    } finally {
+      setLoading(false);
     }
+  }
+  useEffect(() => {
     fetchCart();
   }, []);
 
@@ -35,13 +35,13 @@ function CartPage() {
       const response = await axios.delete("/api/user/cart", {
         data: { productId },
       });
-      if (response.data.success) {
+      if (response.data.succcess) {
         setCartData((prevData) => ({
           ...prevData,
           productId: prevData.productId.filter(
             (item) => item.productId._id !== productId
           ),
-          totalPrice: response.data.data.totalPrice,
+          // totalPrice: response.data.data.totalPrice,
         }));
       }
     } catch (error) {
